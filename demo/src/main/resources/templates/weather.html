@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thông tin thời tiết</title>
+    <link rel="stylesheet" href="../styles.css">
+    <style>
+        .weather-day, h2, button, form {
+            user-select: none;
+        }
+        button {
+            margin-top: 10px;
+        }
+        .weather-icon {
+            width: 50px;
+            height: 50px;
+        }
+    </style>
+    
+</head>
+<body>
+    <div class="weather-container">
+        <div class="search-box">
+            <form action="#" th:action="@{/weather}" method="get" id="searchForm">
+                <input type="text" id="city-input" name="city" placeholder="Nhập tên thành phố..." th:value="${city}">
+                <button type="submit">Xem thời tiết</button>
+            </form>
+        </div>
+        <h2 th:text="${city}">Hà Nội</h2>
+        <div class="weather-info">
+            <div th:each="info : ${weatherInfo}" class="weather-day">
+                <p th:text="${info.date}">Ngày</p>
+                <img th:src="'http://openweathermap.org/img/wn/' + ${info.icon} + '@2x.png'" class="weather-icon" alt="Weather icon">
+                <p class="temperature" th:text="${info.temp + '°C'}">21°C</p>
+                <p th:text="${info.description}">Mây đen u ám</p>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
